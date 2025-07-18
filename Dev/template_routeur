@@ -1,0 +1,44 @@
+---------------Routeur---------------
+
+(config)# hostname ****
+(config)# ip domain-name ****
+(config)# crypto key generate rsa
+(config)# ip ssh version 2 ----- 1024
+(config)# username **** secret ****
+(config)# line vty 0 4
+(config-line)# transport input ssh
+(config-line)# login local
+(config)# line console 0
+(config-line)# password cisco
+(config-line)# login
+
+----(a. sans VLAN)----                       |----(b. avec VLAN)----
+(config)# interface */*                      |(config)# interface */*
+(config-if)# ip address ***.***.***.*** mask |(config-if)# no shutdown
+(config-if)# no shutdown                     |(config-if)# interface */*.*
+		                             |(config-if)# encapsulation dot1q *
+	                                     |(config-if)# ip address ***.***.***.*** mask 
+
+----(a. coté opposé à l'ISP)----             |----(b. coté face à l'ISP)----
+(config)# interface */*			     |(config) interface */*
+(config-if)# ip nat inside                   |(config-if)# ip nat outside
+
+(config)# access-list * permit host ***.***.***.*** wildcart
+
+----(routage vers isp)----
+(config)# ip route 0.0.0.0 0.0.0.0 ***.***.***.*** ou */*
+
+----(a. RIP)----                             |----(b. OSPF)----
+(config)# router rip                         |(config)# router ospf1
+(config-router)# version 2                   |(config-router)# network ***.***.***.*** wildcart area 0
+(config-router)# network ***.***.***.***     |"addresse ip des réseaux voisins"
+
+(config-router)# default-information originate
+
+----(si l'interface est connectée à un PC/Serveur/Switch)----
+(config-router)# passive-interface */*
+
+----(interface du routeur où est configurée la gateway du réseau client DHCP)----
+(config)# interface */*.*
+(config-sub-if)# ip helper-address ***.***.***.***
+"adresse ip du serveur DHCP"
