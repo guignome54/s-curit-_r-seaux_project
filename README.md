@@ -1,5 +1,5 @@
 Première ébauche de la topologie
-<img width="927" height="517" alt="Screenshot_130" src="https://github.com/user-attachments/assets/782ac08a-b651-4037-9d16-aaa4188e4db0" />
+<img width="933" height="557" alt="Screenshot_131" src="https://github.com/user-attachments/assets/c872573d-dd6f-4583-9cd7-527e6b71b1a8" />
 
 ## Sécurité
 ### ARP cache poisoning
@@ -20,3 +20,4 @@ Bien définir les switchs trunk et access
 ?
 ### Attaques de reconnaissances
 ?
+
