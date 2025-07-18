@@ -1,0 +1,14 @@
+---------------Switch---------------
+
+(config)# vlan *
+(config-vlan)# name *
+
+----(a. relié à un PC/server)----            |----(b. relié à un switch/routeur)---- 
+(config)# interface */*                      |(config)#interface */*
+(config-if)# switchport mode access          |(config-if)# switchport mode trunk
+(config-if)# switchport access vlan *        |"switchport trunk native vlan *"
+
+----(si le switch à une ip)----
+(config)#interface vlan*
+(config-vlan)# ip address ***.***.***.*** mask
+(config-vlan)# ip default-gateway ***.***.***
