@@ -1,1 +1,52 @@
+! ========= Sécurité globale =========
+ip dhcp snooping
+ip dhcp snooping vlan 10,20,30,40,99
+ip arp inspection vlan 10,20,30,40,99
+no cdp run
+! ========= VLANs =========
+vlan 10
+ name Medecins
+vlan 20
+ name Secretariat
+vlan 30
+ name Patients
+vlan 40
+ name Serveurs
+vlan 99
+ name Default
 
+! ========= Interfaces ACCESS =========
+interface range GigabitEthernet0/X - X
+ switchport mode access
+ switchport access vlan XX
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ switchport port-security maximum 2
+ switchport port-security mac-address sticky
+ switchport port-security violation restrict
+ ip dhcp snooping limit rate 10
+ ip arp inspection trust
+
+! ========= Interfaces pour clients VLAN 20 et 30 =========
+interface GigabitEthernet0/XX
+ switchport access vlan 20
+interface GigabitEthernet0/XX
+ switchport access vlan 30
+
+! ========= Management =========
+interface vlan 99
+ ip address XXX.XXX.XXX.XXX XXX.XXX.XXX.XXX
+ no shutdown
+
+ip default-gateway XXX.XXX.XXX.XXX
+!
+
+! ========= Sauvegarde =========
+line vty 0 4
+ password XXX
+ login
+ transport input ssh
+!
+end
+write memory
