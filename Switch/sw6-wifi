@@ -1,0 +1,52 @@
+!----------------------
+enable
+!
+conf t
+!
+hostname sw6-wifi
+!
+ip domain-name meditech.be
+!
+username admin privilege 15 secret wifi
+!
+line vty 0 15
+ login local
+ transport input ssh
+ access-class SSH in
+!
+crypto key generate rsa
+ 1024
+!
+ip ssh version 2
+!
+ip dhcp snooping 
+!
+ip dhcp snooping vlan 10
+!
+ip arp insepction vlan 10
+!
+no cdp run
+!
+vlan 40
+ name Wifi
+!
+interface GigabitEthernet 0/0
+ switchport mode access
+ switchport access vlan 40
+ spanning-tree bpduguard enable
+ switchport port-security
+ ! switchport port-security maximum 2
+ switchport port-security mac-address sticky
+ ! switchport port-security violation restrict
+ ! ip dhcp snooping limit rate 10
+ ip arp inspection trust
+!
+interface vlan 40
+ ip address 192.168.40.241 255.255.255.0
+ no shut
+!
+ip default-gateway 192.168.40.1
+!
+end
+!
+copy running-config startup-config
