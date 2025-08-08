@@ -1,0 +1,64 @@
+!----------------------
+enable
+!
+conf t
+!
+hostname sw5-ext
+!
+ip domain-name meditech.be
+!
+username admin privilege 15 secret extranet
+!
+line vty 0 15
+ login local
+ transport input ssh
+ access-class SSH in
+!
+crypto key generate rsa
+ 1024
+!
+ip ssh version 2
+!
+ip dhcp snooping 
+!
+ip dhcp snooping vlan 200
+!
+ip arp insepction vlan 200
+!
+no cdp run
+!
+vlan 200
+ name Dmz
+!
+interface GigabitEthernet 0/0
+ switchport mode access
+ switchport access vlan 200
+ spanning-tree bpduguard enable
+ switchport port-security
+ ! switchport port-security maximum 2
+ switchport port-security mac-address sticky
+ ! switchport port-security violation restrict
+ ! ip dhcp snooping limit rate 10
+ ip arp inspection trust
+!
+interface GigabitEthernet0/1
+ switchport mode access
+ switchport access vlan 200
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+ switchport port-security
+ ! switchport port-security maximum 2
+ switchport port-security mac-address sticky
+ ! switchport port-security violation restrict
+ !ip dhcp snooping limit rate 10
+ ip arp inspection trust
+!
+interface vlan 200
+ ip address 192.168.200.241 255.255.255.0
+ no shut
+!
+ip default-gateway 192.168.200.1
+!
+end
+!
+copy running-config startup-config
