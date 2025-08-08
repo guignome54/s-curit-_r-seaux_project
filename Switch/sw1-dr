@@ -5,7 +5,7 @@ conf t
 !
 hostname sw1-dr
 !
-ip domain-name meditech.be
+ip domain-name meditechbelgica.be
 !
 username admin privilege 15 secret medecins
 !
