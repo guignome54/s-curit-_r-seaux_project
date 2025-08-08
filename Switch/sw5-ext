@@ -31,14 +31,9 @@ vlan 200
  name Dmz
 !
 interface GigabitEthernet 0/0
- switchport mode access
- switchport access vlan 200
- spanning-tree bpduguard enable
- switchport port-security
- ! switchport port-security maximum 2
- switchport port-security mac-address sticky
- ! switchport port-security violation restrict
- ! ip dhcp snooping limit rate 10
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 10,20,30,40,200
+ switchport mode trunk
  ip arp inspection trust
 !
 interface GigabitEthernet0/1
