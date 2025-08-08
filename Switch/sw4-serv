@@ -5,7 +5,7 @@ conf t
 !
 hostname sw4-db
 !
-ip domain-name meditech.be
+ip domain-name meditechbelgica.be
 !
 username admin privilege 15 secret servers
 !
