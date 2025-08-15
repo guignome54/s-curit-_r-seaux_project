@@ -1,0 +1,78 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MeditechBelgica - Prise de rendez-vous</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <strong>MeditechBelgica</strong>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Prendre rendez-vous</h1>
+      <p>Version de démonstration, simple et sans animations.</p>
+      <a class="btn" href="#reservation">Commencer</a>
+    </section>
+
+    <section id="services">
+      <h2>Services</h2>
+      <ul>
+        <li>Médecine générale</li>
+        <li>Pédiatrie</li>
+        <li>Dermatologie</li>
+      </ul>
+    </section>
+
+    <section id="reservation">
+      <h2>Réservation</h2>
+      <form id="booking-form">
+        <label>Nom
+          <input type="text" name="name" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" required>
+        </label>
+        <label>Date
+          <input type="date" name="date" required>
+        </label>
+        <label>Heure
+          <input type="time" name="time" required>
+        </label>
+        <label>Service
+          <select name="service" required>
+            <option value="medgen">Médecine générale</option>
+            <option value="pedia">Pédiatrie</option>
+            <option value="derm">Dermatologie</option>
+          </select>
+        </label>
+        <button class="btn" type="submit">Envoyer</button>
+        <p id="form-status" class="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>DMZ Extranet – Démonstration GNS3</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© MeditechBelgica</small>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
